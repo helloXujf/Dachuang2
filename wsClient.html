@@ -1,0 +1,35 @@
+<html>
+<body>
+<p>Test Client</p>
+<br>
+	
+    <script>
+        var test = null;
+        var socket = new WebSocket("ws://127.0.0.1:5566");
+        var msg = 'hello im client';
+
+        document.write("Clinet is running...");
+        
+        socket.onopen = function(event){
+		alert("websocket is open");
+
+        socket.send(msg);
+
+        socket.onmessage = function(event){
+            document.write("recving data");
+        };
+	};
+	socket.onerror = function(event){
+		document.write("websocket create failed");
+	};
+		
+	window.onbeforeunload = function(){
+             socket.send("Client is Leaving");
+             return "Are you sure";
+        };
+		
+    </script>
+
+</body>
+
+</html>
